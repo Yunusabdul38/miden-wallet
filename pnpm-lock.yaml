@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@demox-labs/miden-wallet-adapter':
+        specifier: ^0.9.2
+        version: 0.9.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
       next:
         specifier: 16.0.4
         version: 16.0.4(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -115,6 +118,35 @@ packages:
   '@babel/types@7.28.5':
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
+
+  '@demox-labs/miden-wallet-adapter-base@0.9.0':
+    resolution: {integrity: sha512-THKrVtC9LFnTJfjwAeGQtE4Xj3C5Wj1bQ5ezH1FrJxinhWC0vyBXizHQDvcXqKSVnnokzctHt3NW758r1SmcDg==}
+
+  '@demox-labs/miden-wallet-adapter-miden@0.9.1':
+    resolution: {integrity: sha512-Y2fxrpITejV/ECfgThzAHpAmWRyLRCYezFZOOk0rj0dvFl2H3GgKFWwpJz07x7JX7GmGWzDm9PJkNr6H6A7+1Q==}
+    peerDependencies:
+      typescript: ^5.0.0
+
+  '@demox-labs/miden-wallet-adapter-react@0.9.0':
+    resolution: {integrity: sha512-MdOAzZQByKRQb5enEFrxUNg2yiLwLy4iO57lA9zdOzModuCSDM4nY3kg6qdxtvwE4Gdl75Ji0KbMG9yOZS/Y1w==}
+    peerDependencies:
+      react: ^19.1.1
+
+  '@demox-labs/miden-wallet-adapter-reactui@0.9.2':
+    resolution: {integrity: sha512-ky7H3ttUy+ZqBdvRSmWoun4xXEUu4d2gOzxMJfdZRAT/dN6xx4sfchfLjgstCycZERqAhjPR1lUhUWb860mzXw==}
+    peerDependencies:
+      '@types/react': ^19.0.0
+      '@types/react-dom': ^19.0.0
+      react: ^19.1.1
+      react-dom: ^19.1.1
+
+  '@demox-labs/miden-wallet-adapter@0.9.2':
+    resolution: {integrity: sha512-eT5+ycMe3MM9JhaAjgVXomI945YsG60zNRCzDzCWl+NfnngJ8jLnjQDCstqWMvVFKLendJ9Jx/J8dp9wrSE5Yg==}
+    peerDependencies:
+      '@types/react': ^19.0.0
+      '@types/react-dom': ^19.0.0
+      react: ^19.1.1
+      react-dom: ^19.1.1
 
   '@emnapi/core@1.7.1':
     resolution: {integrity: sha512-o1uhUASyo921r2XtHYOHy7gdkGLge8ghBEQHMWmyJFoXlpU58kIrhhN3w26lpQb6dspetweapMn2CSNwQ8I4wg==}
@@ -1040,6 +1072,9 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
+  eventemitter3@5.0.1:
+    resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
+
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
@@ -1484,6 +1519,11 @@ packages:
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
+  nanoid@5.1.6:
+    resolution: {integrity: sha512-c7+7RQ+dMB5dPwwCp4ee1/iV/q2P6aK1mTZcfr1BTuVlyW9hJYiMPybJCcnBlQtuSmTIWNeazm/zqNoZSSElBg==}
+    engines: {node: ^18 || >=20}
     hasBin: true
 
   napi-postinstall@0.3.4:
@@ -2010,6 +2050,43 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@demox-labs/miden-wallet-adapter-base@0.9.0':
+    dependencies:
+      eventemitter3: 5.0.1
+
+  '@demox-labs/miden-wallet-adapter-miden@0.9.1(typescript@5.9.3)':
+    dependencies:
+      '@demox-labs/miden-wallet-adapter-base': 0.9.0
+      nanoid: 5.1.6
+      typescript: 5.9.3
+
+  '@demox-labs/miden-wallet-adapter-react@0.9.0(react@19.2.0)':
+    dependencies:
+      '@demox-labs/miden-wallet-adapter-base': 0.9.0
+      react: 19.2.0
+
+  '@demox-labs/miden-wallet-adapter-reactui@0.9.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@demox-labs/miden-wallet-adapter-base': 0.9.0
+      '@demox-labs/miden-wallet-adapter-react': 0.9.0(react@19.2.0)
+      '@types/react': 19.2.7
+      '@types/react-dom': 19.2.3(@types/react@19.2.7)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  '@demox-labs/miden-wallet-adapter@0.9.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)':
+    dependencies:
+      '@demox-labs/miden-wallet-adapter-base': 0.9.0
+      '@demox-labs/miden-wallet-adapter-miden': 0.9.1(typescript@5.9.3)
+      '@demox-labs/miden-wallet-adapter-react': 0.9.0(react@19.2.0)
+      '@demox-labs/miden-wallet-adapter-reactui': 0.9.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@types/react': 19.2.7
+      '@types/react-dom': 19.2.3(@types/react@19.2.7)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+    transitivePeerDependencies:
+      - typescript
 
   '@emnapi/core@1.7.1':
     dependencies:
@@ -3042,6 +3119,8 @@ snapshots:
 
   esutils@2.0.3: {}
 
+  eventemitter3@5.0.1: {}
+
   fast-deep-equal@3.1.3: {}
 
   fast-glob@3.3.1:
@@ -3459,6 +3538,8 @@ snapshots:
   ms@2.1.3: {}
 
   nanoid@3.3.11: {}
+
+  nanoid@5.1.6: {}
 
   napi-postinstall@0.3.4: {}
 
