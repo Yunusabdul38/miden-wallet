@@ -1,45 +1,67 @@
-import { useWallet, SendTransaction } from "@demox-labs/miden-wallet-adapter";
+"use client";
+import React, { useState } from 'react';
+import { useWallet } from "@demox-labs/miden-wallet-adapter";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { useBalance } from "./hooks/useBalance";
+import { useSendTransaction } from "./hooks/useSendTransaction";
+import { StatusMessage } from "./components/send/StatusMessage";
+import { TransactionForm } from "./components/send/TransactionForm";
+import { PrivateTransferToggle } from "./components/send/PrivateTransferToggle";
+import { ManualExportSection } from "./components/send/ManualExportSection";
+import { WalletLockedState } from "./components/send/WalletLockedState";
 
 export default function SendComponent() {
-  const { wallet, address, connected } = useWallet();
+  const { connected } = useWallet();
+  const [recipient, setRecipient] = useState('');
+  const [amount, setAmount] = useState('');
+  const [faucetId] = useState('mtst1ap2t7nsjausqsgrswk9syfzkcu328yna');
+  const [isPrivate, setIsPrivate] = useState(false);
 
-  console.log(wallet, address, connected);
-
-  const handleSend = async () => {
-    if (!wallet || !address) return;
-
-    const transaction = new SendTransaction(
-      address,
-      "mtst1aqmy077tpm3aqypr4vmgn6fe8yk4duud_qruqqypuyph",
-      "faucet_id_here",
-      "private", // or 'private'
-      100000000 // amount
-    );
-
-    try {
-      // Use the correct method to send the transaction
-      await wallet.adapter.sendTransaction(transaction);
-      console.log("Transaction sent successfully!");
-    } catch (error) {
-      console.error("Transaction failed:", error);
-    }
-  };
+  const balance = useBalance(faucetId);
+  const { handleSend, loading, status } = useSendTransaction(faucetId, isPrivate);
 
   if (!connected) {
-    return <p>Please connect your wallet</p>;
+    return <WalletLockedState />;
   }
 
   return (
-    <div className="py-20 px-10 flex-col gap-10 flex">
-      <p className="text-3xl font-semibold">
-        Connected: <span className="text-base">{address}</span>
-      </p>
-      <button
-        className="bg-blue-500 px-6 py-3 rounded-4xl"
-        onClick={handleSend}
-      >
-        Send Transaction
-      </button>
-    </div>
+    <Card 
+      title="Send Tokens" 
+      className="animate-in fade-in slide-in-from-bottom-4 duration-700 border-orange-500/20 shadow-2xl shadow-orange-500/10"
+    >
+      <div className="space-y-8">
+        {status && <StatusMessage status={status} />}
+
+        <div className="space-y-6">
+          <TransactionForm
+            recipient={recipient}
+            setRecipient={setRecipient}
+            amount={amount}
+            setAmount={setAmount}
+            balance={balance}
+          />
+
+          <PrivateTransferToggle
+            isPrivate={isPrivate}
+            setIsPrivate={setIsPrivate}
+          />
+        </div>
+
+        <div className="pt-4">
+          <Button 
+            onClick={() => handleSend(recipient, amount)} 
+            isLoading={loading}
+            className="w-full h-14 text-lg font-medium shadow-xl shadow-orange-900/20 hover:shadow-orange-900/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+            variant="primary"
+            size="lg"
+          >
+            {isPrivate ? 'Send Private Note' : 'Send Tokens'}
+          </Button>
+        </div>
+
+        <ManualExportSection />
+      </div>
+    </Card>
   );
 }
